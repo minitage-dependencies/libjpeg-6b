@@ -4,4 +4,6 @@ def pre_make(options, buildout):
     # The installation procedure is arrogant enough to expect all the
     # directories to exist and fails otherwise.
     for dir in ('bin', 'man/man1', 'include', 'lib'):
-        os.makedirs(os.path.join(options['location'], dir))
+        os.makedirs(
+            os.path.join(options['location'], dir)
+        )
