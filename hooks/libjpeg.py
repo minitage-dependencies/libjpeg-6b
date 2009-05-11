@@ -11,6 +11,7 @@ def pre_make(options, buildout):
             os.path.join(options['location'], dir)
         )
 def libtoolize(options, buildout):
+    """relibtoolize if you can do it, stolen from gentoo jpeg ebuild"""
     cwd = os.getcwd()
     os.chdir(options['compile-directory'])
     l = None
