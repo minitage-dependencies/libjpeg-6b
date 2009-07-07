@@ -1,4 +1,7 @@
 import os
+import shutil
+from minitage.core.common import which
+
 def pre_make(options, buildout):
     """Custom pre-make hook for building libjpeg."""
     # The installation procedure is arrogant enough to expect all the
@@ -7,3 +10,20 @@ def pre_make(options, buildout):
         os.makedirs(
             os.path.join(options['location'], dir)
         )
+def libtoolize(options, buildout):
+    """relibtoolize if you can do it, stolen from gentoo jpeg ebuild"""
+    cwd = os.getcwd()
+    os.chdir(options['compile-directory'])
+    l = None
+    try:
+        l = which('libtoolize')
+    except Exception, e:
+        pass
+    if l:
+        os.remove('libtool-wrap')
+        shutil.copy('libtool', 'libtool-wrap')
+        os.system(l)
+    os.chdir(cwd)
+
+
+
